@@ -1,4 +1,4 @@
-import Sea from "@/home/background";
+import Sea from "@/home/sea";
 
 export default function Home() {
   return (
