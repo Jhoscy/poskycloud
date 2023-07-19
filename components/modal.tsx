@@ -1,4 +1,5 @@
 'use client'
+import { ReactNode } from 'react';
 /** Core */
 /** Components */
 import Modal from 'react-modal';
@@ -13,16 +14,25 @@ const modalStyle = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    // background: 'transparent',
+    backgroundColor: 'rgba(0,0,0,.5)',
+    borderRadius: 0,
+    padding: 0,
+    border: 'none',
+  },
+  overlay: {
+    backgroundColor: '#00000',
   },
 };
 /** Types */
 export type PoskyModalProps = {
   isOpen: boolean;
+  children: ReactNode,
   onModalClose?: () => void;
 }
 
 export default function PoskyModal(props: PoskyModalProps) {
-  const { isOpen, onModalClose } = props;
+  const { isOpen, children, onModalClose } = props;
 
   const afterOpenModal = (modal: any) => console.log('AFTER OPEN', modal);
 
@@ -33,15 +43,6 @@ export default function PoskyModal(props: PoskyModalProps) {
     style={modalStyle}
     contentLabel="Example Modal"
   >
-    <h2>Hello</h2>
-    <button onClick={onModalClose}>close</button>
-    <div>I am a modal</div>
-    <form>
-      <input />
-      <button>tab navigation</button>
-      <button>stays</button>
-      <button>inside</button>
-      <button>the modal</button>
-    </form>
+    {children}
   </Modal>
 }

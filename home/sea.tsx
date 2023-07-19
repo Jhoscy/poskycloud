@@ -5,6 +5,7 @@ import Image from "next/image"
 import { setFixedHeight } from "@/lib/utilities";
 import PoskyModal from "@/components/modal";
 import { useState } from "react";
+import LinkTree from "@/components/linktree";
 
 export default function Sea() {
     /** Fixed Viewporth height */
@@ -20,6 +21,6 @@ export default function Sea() {
             style={{ objectFit: 'cover', height: '100%', width: '100%' }}
             onClick={() => setModalIsOpen(true)}
         />
-        <PoskyModal isOpen={modalOpen} onModalClose={onModalCloseHandler}/>
+        <PoskyModal isOpen={modalOpen} onModalClose={onModalCloseHandler} children={<LinkTree />}/>
     </div>
 }   
