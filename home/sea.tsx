@@ -1,11 +1,12 @@
 'use client'
 /** Core */
 import Image from "next/image"
+import { useState } from "react";
 /** Utilities */
 import { setFixedHeight } from "@/lib/utilities";
-import PoskyModal from "@/components/modal";
-import { useState } from "react";
+/** Components */
 import LinkTree from "@/components/linktree";
+import PoskyModal from "@/components/modal";
 
 export default function Sea() {
     /** Fixed Viewporth height */
