@@ -17,7 +17,7 @@ export default function Sea() {
 
     return <div className="w-full h-full">
         <Image
-            src="/full.gif" alt="sea background"
+            src="/images/full.gif" alt="sea background"
             fill={true}
             style={{ objectFit: 'cover', height: '100%', width: '100%' }}
             onClick={() => setModalIsOpen(true)}

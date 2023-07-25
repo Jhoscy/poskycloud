@@ -19,6 +19,7 @@ const modalStyle = {
     borderRadius: 0,
     padding: 0,
     border: 'none',
+    width: '90%'
   },
   overlay: {
     backgroundColor: '#00000',
@@ -41,7 +42,7 @@ export default function PoskyModal(props: PoskyModalProps) {
     onAfterOpen={afterOpenModal}
     onRequestClose={onModalClose}
     style={modalStyle}
-    contentLabel="Example Modal"
+    contentLabel="Navighiamo"
   >
     {children}
   </Modal>
