@@ -1,4 +1,5 @@
 'use client'
+import { useWindowSize } from '@/lib/utilities';
 import { ReactNode } from 'react';
 /** Core */
 /** Components */
@@ -14,7 +15,6 @@ const modalStyle = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    // background: 'transparent',
     backgroundColor: 'rgba(0,0,0,.5)',
     borderRadius: 0,
     padding: 0,
@@ -34,6 +34,14 @@ export type PoskyModalProps = {
 
 export default function PoskyModal(props: PoskyModalProps) {
   const { isOpen, children, onModalClose } = props;
+
+  const windowSize = useWindowSize();
+
+  if (windowSize.width > 1024 ) {
+    modalStyle.content.width = '500px';
+  } else {
+    modalStyle.content.width = '90%';
+  }
 
   const afterOpenModal = (modal: any) => console.log('AFTER OPEN', modal);
 
