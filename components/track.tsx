@@ -1,9 +1,20 @@
 /** Core */
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+/** Components */
 import AudioStatusTimeBar from "./audio-bar";
+import ButtonBar from "./button-bar";
+/** Lib */
+import { AudioBarButtons } from "@/lib/buttons-bar";
 
-export default function Track() {
+export type TrackProps = {
+    windowSize: {
+        width: number;
+        height: number;
+    }
+}
+
+export default function Track({ windowSize }: TrackProps) {
     const audioRef = useRef<any>();
     const [trackMoment, setTrackMoment] = useState(false);
 
@@ -20,23 +31,20 @@ export default function Track() {
         audioRef.current.currentTime = 0;
     }
 
+    const functionsRefs = [
+        onPlayClick,
+        onPauseClick,
+        onRestartClick
+    ];
+
+    const margin = windowSize.height < 550 ? 'mt-[-10px]' : '';
+
     return <div className="min-w-full min-h-[15vh] relative">
         <audio ref={audioRef} className="w-full">
             <source src="/audio/8BITIAMO.mp3" type="audio/mp3"></source>
         </audio>
-        <div className="flex justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            {/* Play button */}
-            <button className={`text-xl ${trackMoment ? 'animate-pulse' : ''}`} onClick={onPlayClick}>
-                <Image src="/icons/play.png" alt="Play" width="50" height="60" />
-            </button> 
-            {/* Pause button */}
-            <button className={`text-xl ml-3 mr-3 ${!trackMoment && audioRef.current?.currentTime > 0 ? 'animate-pulse' : ''}`} onClick={onPauseClick}>
-                <Image src="/icons/pause.png" alt="Pause" width="50" height="60" />
-            </button> 
-            {/** Stop button */}
-            <button className="text-xl" onClick={onRestartClick}>
-                <Image src="/icons/restart.png" alt="Restart" width="50" height="30" />
-            </button> 
+        <div className={`flex justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${margin}`}>
+            {AudioBarButtons.map((button, index) => <ButtonBar key={index} windowSize={windowSize} style={button.style(trackMoment, audioRef)} image={button.image} onButtonClick={button.handler(functionsRefs[index])} />)}
         </div>
         {audioRef.current && <div className="w-full flex justify-center absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <AudioStatusTimeBar audioRef={audioRef} />
