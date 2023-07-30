@@ -1,12 +1,14 @@
 {
-  "name": "posky-sea",
+  "name": "posky-cloud",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jhoscy.github.io/poskycloud",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "next build && next export && gh-pages -d out"
   },
   "dependencies": {
     "@types/node": "20.4.2",
@@ -25,6 +27,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@types/react-modal": "^3.16.0"
+    "@types/react-modal": "^3.16.0",
+    "gh-pages": "^5.0.0"
   }
 }
