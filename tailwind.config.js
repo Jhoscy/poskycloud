@@ -5,11 +5,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [{ pattern: /text-./ }, { pattern: /animate-./ }],
   theme: {
     screens: {
-      xxsm: '320px',
-      xsm: '480px',
-      ssm: '576px',
+      xxsm: "320px",
+      xsm: "480px",
+      ssm: "576px",
       sm: "640px",
       // => @media (min-width: 640px) { ... }
 

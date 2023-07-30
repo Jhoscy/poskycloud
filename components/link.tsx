@@ -1,5 +1,6 @@
 /** Core */
 import Image from "next/image";
+import Link from "next/link";
 
 export type LinkProps = {
     windowSize: {
@@ -13,10 +14,11 @@ export type LinkProps = {
         alt: string;
         width: number;
         height: number;
-    }
+    },
+    href: string;
 }
 
-export default function CustomLink({ windowSize, textColor, image }: LinkProps) {
+export default function CustomLink({ windowSize, textColor, image, href }: LinkProps) {
     let { label, src, alt, width, height } = image;
 
     if (windowSize.height < 550) {
@@ -24,8 +26,13 @@ export default function CustomLink({ windowSize, textColor, image }: LinkProps) 
         height = height - 10;
     }
 
-    return <div className={`w-full flex items-center justify-between mt-6 xsm:mt-2  ${windowSize.height < 550 ? 'mt-2' : ''}`}>
-        <span className={`${textColor} text-2xl ${windowSize.height < 550 ? 'text-lg' : ''}`}>{label}</span>
-        <Image src={src} alt={alt} width={width} height={height} />
+    const className = `${textColor} ${windowSize.height < 550 ? 'text-lg' : 'text-2xl'}`;
+    return <div className={`w-full flex items-center justify-between mt-6 xsm:mt-2 ${windowSize.height < 550 || windowSize.width < 400 ? 'xxsm:mt-2' : ''}`}>
+        <Link href={href}>
+            <span className={className}>{label}</span>
+        </Link>
+        <Link href={href}>
+            <Image src={src} alt={alt} width={width} height={height} />
+        </Link>
     </div>
 }
