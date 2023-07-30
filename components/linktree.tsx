@@ -31,7 +31,7 @@ export default function LinkTree({ onWebClick }: LinkTreeProps) {
                             title: "Navighiamo",
                         }}
                         sites={['facebook', 'twitter', 'telegram', 'whatsapp']}
-                        onClick={() => console.log("shared successfully!")}
+                        // onClick={() => console.log("shared successfully!")}
                     >
                         <Image src="/icons/share.png" alt="Share" width="35" height="35" onClick={onWebClick} />
                     </RWebShare>

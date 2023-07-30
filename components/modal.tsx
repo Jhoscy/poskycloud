@@ -43,7 +43,7 @@ export default function PoskyModal(props: PoskyModalProps) {
     modalStyle.content.width = '90%';
   }
 
-  const afterOpenModal = (modal: any) => console.log('AFTER OPEN', modal);
+  const afterOpenModal = (modal: any) => {};
 
   return <Modal
     isOpen={isOpen}
