@@ -2,13 +2,13 @@
   "name": "posky-cloud",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jhoscy.github.io/poskycloud",
+  "homepage": "https://Jhoscy.github.io/poskycloud",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export && gh-pages -d out"
+    "deploy": "next build && next export && touch out/.nojekyll && gh-pages -d out"
   },
   "dependencies": {
     "@types/node": "20.4.2",
