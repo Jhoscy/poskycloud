@@ -56,13 +56,13 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
         with:
-          env:
-            NEXT_PUBLIC_BASE_PATH: ${{ secrets.NEXT_PUBLIC_BASE_PATH }}
           # Automatically inject basePath in your Next.js configuration file and disable
           # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
           #
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
+        env:
+            NEXT_PUBLIC_BASE_PATH: ${{ secrets.NEXT_PUBLIC_BASE_PATH }}
       - name: Restore cache
         uses: actions/cache@v3
         with:
