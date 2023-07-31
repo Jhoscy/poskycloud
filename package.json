@@ -2,7 +2,7 @@
   "name": "posky-cloud",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Jhoscy.github.io/poskycloud",
+  "homepage": "https://Jhoscy.github.io/poskycloud/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
