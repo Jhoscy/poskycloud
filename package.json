@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export && touch out/.nojekyll && gh-pages -d out"
+    "deploy-all": "next build && next export && touch out/.nojekyll && gh-pages -d out -b gh-pages",
+    "deploy": "gh-pages -d out -b gh-pages"
   },
   "dependencies": {
     "@types/node": "20.4.2",
