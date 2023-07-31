@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: "export",
+const withImages = require("next-images");
+
+module.exports = withImages({
+  // Your Next.js configuration options here
   basePath: "/poskycloud",
   assetPrefix: "/poskycloud/",
-};
-
-module.exports = nextConfig
+});
