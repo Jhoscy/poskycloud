@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 
+const isProd = process.env.NODE_ENV === "production";
 module.exports = {
   // Your Next.js configuration options here
-  output: 'export',
+  output: isProd ? 'export' : undefined,
   basePath: "/poskycloud",
-  assetPrefix: "/poskycloud/",
+  assetPrefix: isProd ? "/poskycloud/": undefined,
 };

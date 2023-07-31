@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useState } from "react";
 /** Utilities */
-import { setFixedHeight } from "@/lib/utilities";
+import { prefix, setFixedHeight } from "@/lib/utilities";
 /** Components */
 import LinkTree from "@/components/linktree";
 import PoskyModal from "@/components/modal";
@@ -18,7 +18,7 @@ export default function Sea() {
 
     return <div className="w-full h-full overflow-hidden">
         <Image
-            src="/images/full.gif" alt="sea background"
+            src={`/${prefix}/images/full.gif`} alt="sea background"
             fill={true}
             style={{
                 objectFit: 'cover',

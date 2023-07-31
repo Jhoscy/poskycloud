@@ -1,6 +1,8 @@
 /** Core */
 import Image from "next/image";
 import Link from "next/link";
+/** Utiities */
+import { prefix } from "@/lib/utilities";
 
 export type LinkProps = {
     windowSize: {
@@ -32,7 +34,7 @@ export default function CustomLink({ windowSize, textColor, image, href }: LinkP
             <span className={className}>{label}</span>
         </Link>
         <Link href={href}>
-            <Image src={src} alt={alt} width={width} height={height} />
+            <Image src={`/${prefix}/${src}`} alt={alt} width={width} height={height} />
         </Link>
     </div>
 }
