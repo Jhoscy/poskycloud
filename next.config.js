@@ -5,5 +5,5 @@ module.exports = {
   // Your Next.js configuration options here
   output: isProd ? 'export' : undefined,
   basePath: "/poskycloud",
-  assetPrefix: isProd ? "/poskycloud/": undefined,
+  assetPrefix: isProd ? "https://jhoscy.github.io/poskycloud/": undefined,
 };
