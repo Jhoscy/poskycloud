@@ -91,7 +91,9 @@ jobs:
     needs: build
     steps:
       - name: Set environment variables
-        run: echo "NEXT_PUBLIC_BASE_PATH=${{ secrets.NEXT_PUBLIC_BASE_PATH }}" >> $GITHUB_ENV
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ secrets.NEXT_PUBLIC_BASE_PATH }}
+        run: echo "NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH" >> $GITHUB_ENV
 
       - name: Deploy to GitHub Pages
         id: deployment
