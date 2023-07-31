@@ -25,18 +25,18 @@ export const metadata: Metadata = {
       rel: 'icon',
       type: 'image/png',
       sizes: '32x32',
-      url: `/favicon/favicon-32x32.png`,
+      url: `https://jhoscy.github.io/${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon-32x32.png`,
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '16x16',
-      url: `/favicon/favicon-16x16.png`,
+      url: `https://jhoscy.github.io/${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/favicon-16x16.png`,
     },
     {
       rel: 'apple-touch-icon',
       sizes: '180x180',
-      url: `/favicon/apple-touch-icon.png`,
+      url: `https://jhoscy.github.io/${process.env.NEXT_PUBLIC_BASE_PATH}/favicon/apple-touch-icon.png`,
     },
     ]
   },
