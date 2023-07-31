@@ -63,3 +63,5 @@ export class Theme {
   public static LIGHT = "light";
   public static DARK = "dark";
 }
+
+export const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";

@@ -1,5 +1,7 @@
 /** Core */
 import Image from "next/image";
+/** Utilities */
+import { prefix } from "@/lib/utilities";
 
 export type ButtonBarProps = {
     windowSize: {
@@ -25,6 +27,6 @@ export default function ButtonBar({ windowSize, style, image, onButtonClick}: Bu
     }
 
     return <button className={style} onClick={onButtonClick}>
-        <Image src={src} alt={alt} width={width} height={height} />
+        <Image src={`${prefix}/${src}`} alt={alt} width={width} height={height} />
     </button>
 }

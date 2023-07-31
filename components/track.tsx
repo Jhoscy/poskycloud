@@ -1,11 +1,12 @@
 /** Core */
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useRef, useState } from "react";
 /** Components */
 import AudioStatusTimeBar from "./audio-bar";
 import ButtonBar from "./button-bar";
 /** Lib */
 import { AudioBarButtons } from "@/lib/buttons-bar";
+/** Utilities */
+import { prefix } from "@/lib/utilities";
 
 export type TrackProps = {
     windowSize: {
@@ -41,7 +42,7 @@ export default function Track({ windowSize }: TrackProps) {
 
     return <div className="min-w-full min-h-[15vh] relative">
         <audio ref={audioRef} className="w-full">
-            <source src="/audio/8BITIAMO.mp3" type="audio/mp3"></source>
+            <source src={`${prefix}/audio/8BITIAMO.mp3`} type="audio/mp3"></source>
         </audio>
         <div className={`flex justify-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${margin}`}>
             {AudioBarButtons.map((button, index) => <ButtonBar key={index} windowSize={windowSize} style={button.style(trackMoment, audioRef)} image={button.image} onButtonClick={button.handler(functionsRefs[index])} />)}
