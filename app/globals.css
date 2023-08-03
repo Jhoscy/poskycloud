@@ -12,3 +12,55 @@ body,
   overflow: hidden;
   /* Prevent scrolling */
 }
+
+.circular-portal {
+  width: 0;
+  height: 0;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+}
+
+.door {
+  position: absolute;
+  width: 100px;
+  height: 200px;
+  background-color: #f5a623;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  backface-visibility: hidden;
+}
+
+.door.open {
+  background-color: #4caf50;
+}
+
+.behind-door {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #4caf50;
+  color: #fff;
+  padding: 16px;
+  font-size: 20px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.behind-door-bg {
+  background-color: #ffc107;
+  opacity: 0;
+  width: 100px;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+}
