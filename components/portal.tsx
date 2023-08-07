@@ -13,8 +13,15 @@ const Portal = ({ totalDoors }: PortalProps) => {
 
     const handleDoorClick = (doorNumber: any) => {
         setSelectedDoor((prevDoor) => (prevDoor === doorNumber ? null : doorNumber));
-    };
 
+        if (doorNumber !== selectedDoor && portalRef.current) {
+            const angleStep = 360 / totalDoors;
+            const selectedDoorIndex = doorNumber - 1;
+            const centerRotation = -selectedDoorIndex * angleStep;
+            portalRef.current.style.transform = `rotateY(${centerRotation}deg)`;
+        }
+    };
+    
     const handleMouseDown = (event: any) => {
         setIsDragging(true);
         setRotation(event.clientX);
@@ -52,8 +59,21 @@ const Portal = ({ totalDoors }: PortalProps) => {
             const angleStep = 360 / totalDoors;
             const rotationStep = (newRotation - rotation) * 0.1;
             const newAngle = rotationStep + rotation;
+
+            // Calculate the selected door's index based on the current rotation
+            let selectedDoorIndex = Math.round(newAngle / angleStep) % totalDoors;
+            if (selectedDoorIndex < 0) {
+                selectedDoorIndex += totalDoors;
+            }
+
+            // Calculate the center rotation to position the selected door at the center
+            const centerRotation = -(selectedDoorIndex * angleStep) + 180;
+
+            // Calculate the rotation adjustment to center each door
+            const rotationAdjustment = centerRotation - newAngle;
+
             setRotation(newRotation);
-            portalRef.current.style.transform = `rotateY(${newAngle}deg)`;
+            portalRef.current.style.transform = `rotateY(${newAngle + rotationAdjustment}deg)`;
         }
     };
 
