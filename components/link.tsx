@@ -34,7 +34,7 @@ export default function CustomLink({ windowSize, textColor, image, href }: LinkP
             <span className={className}>{label}</span>
         </Link>
         <Link href={href}>
-            <Image src={`/${prefix}/${src}`} alt={alt} width={width} height={height} />
+            <Image src={`${prefix}/${src}`} alt={alt} width={width} height={height} />
         </Link>
     </div>
 }

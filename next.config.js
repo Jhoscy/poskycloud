@@ -3,7 +3,7 @@
 const isProd = process.env.NODE_ENV === "production";
 module.exports = {
   // Your Next.js configuration options here
-  output: isProd ? 'export' : undefined,
-  basePath: "/poskycloud",
-  assetPrefix: isProd ? "https://jhoscy.github.io/poskycloud/": undefined,
+  output: isProd ? "export" : undefined,
+  basePath: "",
+  assetPrefix: isProd ? `${process.env.NEXT_PUBLIC_DOMAIN_PATH}` : undefined,
 };

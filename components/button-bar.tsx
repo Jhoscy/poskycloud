@@ -27,6 +27,6 @@ export default function ButtonBar({ windowSize, style, image, onButtonClick}: Bu
     }
 
     return <button className={style} onClick={onButtonClick}>
-        <Image src={`/${prefix}/${src}`} alt={alt} width={width} height={height} />
+        <Image src={`${prefix}/${src}`} alt={alt} width={width} height={height} />
     </button>
 }

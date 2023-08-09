@@ -18,7 +18,7 @@ export default function Sea() {
 
     return <div className="w-full h-full overflow-hidden">
         <Image
-            src={`/${prefix}/images/full.gif`} alt="sea background"
+            src={`${prefix}/images/full.gif`} alt="sea background"
             fill={true}
             style={{
                 objectFit: 'cover',
