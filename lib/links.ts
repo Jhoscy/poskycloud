@@ -1,5 +1,5 @@
 enum Links {
-  SPOTIFY = "https://open.spotify.com/track/143lELo5BCvHQ4HHQUMApi?si=386675c028834f31",
+  SPOTIFY = "https://open.spotify.com/track/6vCzXILlR4QEgcxuedOJC8?si=a6d24fdd6b244a5b",
   YOUTUBE = "https://www.youtube.com/watch?v=lj8a52oT14M",
   INSTAGRAM = "https://www.instagram.com/jacopo_tortora/",
 }
