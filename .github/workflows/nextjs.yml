@@ -111,7 +111,9 @@ jobs:
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
-        run: echo "NEXT_PUBLIC_DOMAIN_PATH=$NEXT_PUBLIC_DOMAIN_PATH" >> $GITHUB_ENV
+        run: |
+          echo "NEXT_PUBLIC_DOMAIN_PATH=$NEXT_PUBLIC_DOMAIN_PATH" >> $GITHUB_ENV
+          echo "$FIREBASE_API_KEY"
 
       - name: Deploy to GitHub Pages
         id: deployment

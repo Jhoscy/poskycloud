@@ -20,6 +20,7 @@ export default function Sea() {
     const handleShare = async () => { };
 
     useEffect(() => {
+        console.log('FIREBASE', firebase.options);
         if (typeof window != undefined && isProd) {
             //() Initialize Firebase
             console.log('FIREBASE', firebase);
