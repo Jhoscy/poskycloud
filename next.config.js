@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-import { isProd } from "@/lib/utilities";
+const isProd = process.env.NODE_ENV === "production";
 module.exports = {
   // Your Next.js configuration options here
   output: isProd ? "export" : undefined,
