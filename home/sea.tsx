@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useEffect, useState } from "react";
 /** Utilities */
-import { prefix, setFixedHeight } from "@/lib/utilities";
+import { isProd, prefix, setFixedHeight } from "@/lib/utilities";
 /** Components */
 import LinkTree from "@/components/linktree";
 import PoskyModal from "@/components/modal";
@@ -20,7 +20,7 @@ export default function Sea() {
     const handleShare = async () => { };
 
     useEffect(() => {
-        if (typeof window != undefined) {
+        if (typeof window != undefined && !isProd) {
             //() Initialize Firebase
             console.log('FIREBASE', firebase);
             isSupported().then(supported => {

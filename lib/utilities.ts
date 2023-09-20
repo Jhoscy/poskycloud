@@ -65,3 +65,4 @@ export class Theme {
 }
 
 export const prefix = process.env.NEXT_PUBLIC_BASE_PATH || '';
+export const isProd = process.env.NODE_ENV === "production";
