@@ -1,4 +1,4 @@
-import './globals.css'
+import './globals.scss'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 
@@ -74,7 +74,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={dogica.className}>
+      <body className={dogica.className} style={{ overflow: 'auto'}}>
         {children}
         <div id='react-modal'></div>
       </body>
