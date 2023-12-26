@@ -74,7 +74,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={dogica.className} style={{ overflow: 'auto'}}>
+      <body className={dogica.className}>
         {children}
         <div id='react-modal'></div>
       </body>

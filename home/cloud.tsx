@@ -38,6 +38,86 @@ const albums = [
         dateTime: '2023-12-04',
         name: 'prova'
     },
+    {
+        dateTime: '2023-12-04',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-04',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-01',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-02',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-03',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-04',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-01',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-02',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-03',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-04',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-04',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-04',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-01',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-02',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-03',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-04',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-01',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-02',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-03',
+        name: 'prova'
+    },
+    {
+        dateTime: '2023-12-04',
+        name: 'prova'
+    },
 ]
 
 export default function Cloud() {
@@ -80,21 +160,28 @@ export default function Cloud() {
                     console.log('onLeaveBack', self);
                     cloudPageRef?.current?.style.setProperty("--velocity", '0');
                 }
-            }
+            },
         });
     }, { scope: cloudPageRef });
 
 
-    return <div ref={cloudPageRef} className="cloud-page" >
+    return <div ref={cloudPageRef} className="cloud-page">
         <div className="wrap">
             <ul>
-                {albums.map((album, index) => <li className="li-element" key={index}>
+                {Array.from({ length: 28 }, (_, index) => <li className="li-element" key={`album-${index}`}>
+                    <time dateTime={`2023-12-${index + 1}`}>{index+1}</time>
+                    <span>singolo-{index + 1}</span>
+                </li>)}
+                {/* {albums.map((album, index) => <li className="li-element" key={index}>
                     <time dateTime={album.dateTime}>{index + 1}</time>
                     <span>
-                        {album.name}
+                        {album.name}-{index + 1}
                     </span>
-                </li>)}
+                </li>)} */}
             </ul>
+        </div>
+        <div className="panelwrap">
+            {Array.from({ length: 29}, (_, index) => <div key={index} className="panel"></div>)}
         </div>
     </div>
 }
