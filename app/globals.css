@@ -9,6 +9,25 @@ body,
   /* Set the height to 100% of the viewport */
   margin: 0;
   /* Remove any default margins */
-  overflow: hidden;
+  /* overflow: hidden; */
   /* Prevent scrolling */
+}
+
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+li {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
 }
