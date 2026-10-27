@@ -4,40 +4,23 @@ enum Links {
   INSTAGRAM = "https://www.instagram.com/jacopo_tortora/",
 }
 
-export const ModalLinks = [
+export const MenuLinks = [
   {
     name: "Spotify",
-    textColor: "text-green-400",
-    image: {
-      label: "Spotify",
-      alt: "Spotify",
-      width: 50,
-      height: 60,
-      src: "icons/spotify1.png",
-    },
+    label: "Ascolta su Spotify",
+    icon: "icons/spotify1.png",
     href: Links.SPOTIFY,
   },
   {
-    name: "Youtube",
-    textColor: "text-red-600",
-    image: {
-      label: "Youtube",
-      alt: "Youtube",
-      width: 50,
-      height: 60,
-      src: "icons/youtube.png",
-    },
+    name: "YouTube",
+    label: "Guarda su YouTube",
+    icon: "icons/youtube.png",
     href: Links.YOUTUBE,
   },
   {
-    textColor: "text-purple-400",
-    image: {
-      label: "Instagram",
-      alt: "Instagram",
-      width: 50,
-      height: 60,
-      src: "icons/instagram.png",
-    },
-    href: Links.INSTAGRAM
+    name: "Instagram",
+    label: "Segui su Instagram",
+    icon: "icons/instagram.png",
+    href: Links.INSTAGRAM,
   },
 ];

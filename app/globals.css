@@ -2,13 +2,456 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Palette sampled from the sunset scene in images/full.gif */
+:root {
+  --sky: #ef7929;
+  --gold: #efb629;
+  --sand: #fff8a9;
+  --sun: #ffffff;
+  --sea: #339fff;
+  --sea-low: #2b95f3;
+  --deep: #134a9e;
+  --ink: #000000;
+
+  /* One pixel of the Dogica grid at the base 8px size */
+  --px: 4px;
+  --notch: polygon(
+    0 var(--px), var(--px) var(--px), var(--px) 0,
+    calc(100% - var(--px)) 0, calc(100% - var(--px)) var(--px), 100% var(--px),
+    100% calc(100% - var(--px)), calc(100% - var(--px)) calc(100% - var(--px)), calc(100% - var(--px)) 100%,
+    var(--px) 100%, var(--px) calc(100% - var(--px)), 0 calc(100% - var(--px))
+  );
+}
+
 html,
-body,
-#__next {
+body {
   height: 100%;
-  /* Set the height to 100% of the viewport */
   margin: 0;
-  /* Remove any default margins */
   overflow: hidden;
-  /* Prevent scrolling */
+  background: var(--sea-low);
+  color: var(--sand);
+  font-family: var(--font-pixel), monospace;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+}
+
+:focus-visible {
+  outline: var(--px) solid var(--sand);
+  outline-offset: var(--px);
+}
+
+/* ---------- Scene ---------- */
+
+.scene {
+  position: relative;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--sea-low);
+  cursor: pointer;
+}
+
+.scene.is-started {
+  cursor: default;
+}
+
+.scene-image {
+  object-fit: cover;
+  object-position: 50% 50%;
+  image-rendering: pixelated;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Tall screens: keep the whole scene visible and let the sea run on below it */
+@media (max-aspect-ratio: 4/5) {
+  .scene-image {
+    height: 68% !important;
+  }
+}
+
+/* ---------- Title ---------- */
+
+.title-block {
+  position: absolute;
+  inset: 0 0 auto 0;
+  --title-top: clamp(32px, 9vh, 96px);
+  padding: var(--title-top) 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  pointer-events: none;
+}
+
+.title {
+  --u: 3px;
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sand);
+  /* Shrinks to a 16px heading once the voyage starts; only transform moves, so nothing reflows */
+  --title-end-scale: 0.6667;
+  transform-origin: 50% 0;
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  text-shadow:
+    var(--u) 0 0 var(--ink), calc(var(--u) * -1) 0 0 var(--ink),
+    0 var(--u) 0 var(--ink), 0 calc(var(--u) * -1) 0 var(--ink),
+    var(--u) var(--u) 0 var(--ink), calc(var(--u) * -1) var(--u) 0 var(--ink),
+    var(--u) calc(var(--u) * -1) 0 var(--ink), calc(var(--u) * -1) calc(var(--u) * -1) 0 var(--ink),
+    0 calc(var(--u) * 3) 0 var(--ink), var(--u) calc(var(--u) * 3) 0 var(--ink),
+    calc(var(--u) * -1) calc(var(--u) * 3) 0 var(--ink),
+    0 calc(var(--u) * 2) 0 var(--sky);
+}
+
+@media (min-width: 480px) {
+  .title { --u: 5px; font-size: 40px; --title-end-scale: 0.4; }
+}
+
+@media (min-width: 900px) {
+  .title { --u: 8px; font-size: 64px; --title-end-scale: 0.25; }
+}
+
+.start {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  animation: blink 1.2s steps(1) infinite;
+  transition: opacity 200ms ease;
+}
+
+.start:focus-visible {
+  outline-color: var(--ink);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.is-started .title {
+  transform: translateY(calc(16px - var(--title-top))) scale(var(--title-end-scale));
+}
+
+.is-started .start {
+  animation: none;
+  opacity: 0;
+}
+
+.credit {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  margin: 0;
+  font-size: 8px;
+  color: var(--sand);
+  opacity: 0.8;
+}
+
+.credit {
+  transition: opacity 200ms ease;
+}
+
+.is-started .credit {
+  opacity: 0;
+}
+
+/* ---------- Pixel frame ---------- */
+
+.frame,
+.frame-line,
+.dialog,
+.pixel-button,
+.track {
+  clip-path: var(--notch);
+}
+
+.frame {
+  background: var(--ink);
+  padding: var(--px);
+}
+
+.frame-line {
+  background: var(--sand);
+  padding: var(--px);
+}
+
+.dialog {
+  background: var(--deep);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pixel-button {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: var(--sand);
+  color: var(--ink);
+  box-shadow: inset 0 calc(var(--px) * -1) 0 var(--gold);
+  cursor: pointer;
+}
+
+/* clip-path hides outlines drawn outside the box, so focus rings go inside */
+.pixel-button:focus-visible {
+  outline: var(--px) solid var(--ink);
+  outline-offset: calc(var(--px) * -2);
+}
+
+.pixel-button:hover {
+  background: var(--sun);
+}
+
+.pixel-button:active {
+  box-shadow: inset 0 var(--px) 0 var(--gold);
+}
+
+.pixel-button:active svg {
+  transform: translateY(var(--px));
+}
+
+/* ---------- HUD ---------- */
+
+.hud {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  display: flex;
+  flex-direction: row-reverse;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms ease, visibility 0s 300ms;
+  align-items: center;
+  gap: 12px;
+}
+
+.share-note {
+  font-size: 8px;
+  color: var(--ink);
+}
+
+/* ---------- Dialog ---------- */
+
+.dialog-wrap {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  max-width: 560px;
+  margin: 0 auto;
+  filter: drop-shadow(0 8px 0 rgba(0, 0, 0, 0.35));
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(32px);
+  transition: opacity 300ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s 420ms;
+}
+
+/* Wide screens: move the box beside the boat instead of over it */
+@media (min-width: 1024px) and (min-aspect-ratio: 4/3) {
+  .dialog-wrap {
+    left: auto;
+    right: 32px;
+    bottom: 32px;
+    width: min(440px, 34vw);
+  }
+}
+
+/* Both open: shown with a short delay so the title has started to lift */
+.is-started .hud,
+.is-started .dialog-wrap {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 120ms, 120ms, 0s;
+}
+
+.dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: -8px -8px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sea);
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--sun);
+}
+
+.dialog-text {
+  flex: 1;
+  margin: 0;
+  min-height: 1.6em;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--sun);
+}
+
+/* ---------- Player ---------- */
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-buttons {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+
+.track {
+  flex: 1;
+  min-width: 0;
+  height: 24px;
+  padding: var(--px);
+  display: flex;
+  gap: 2px;
+  background: var(--ink);
+  cursor: pointer;
+  touch-action: none;
+}
+
+.track:focus-visible {
+  outline: 2px solid var(--sand);
+  outline-offset: -2px;
+}
+
+.segment {
+  flex: 1;
+  background: #0c2f66;
+}
+
+.segment.is-filled {
+  background: var(--gold);
+}
+
+.segment.is-filled:last-of-type,
+.segment.is-filled:has(+ .segment:not(.is-filled)) {
+  background: var(--sand);
+}
+
+.time {
+  flex: none;
+  font-size: 8px;
+  color: var(--sun);
+  font-variant-numeric: tabular-nums;
+}
+
+.time-total {
+  color: var(--sea);
+}
+
+@media (max-width: 400px) {
+  .time-total { display: none; }
+}
+
+/* ---------- Menu ---------- */
+
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 0 4px;
+  color: var(--sand);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.menu-item:focus-visible {
+  outline: none;
+}
+
+.menu-cursor {
+  flex: none;
+  color: var(--sun);
+  visibility: hidden;
+}
+
+.menu-item:hover .menu-cursor,
+.menu-item:focus-visible .menu-cursor {
+  visibility: visible;
+  animation: nudge 600ms steps(2) infinite;
+}
+
+.menu-item:hover,
+.menu-item:focus-visible {
+  color: var(--sun);
+}
+
+.menu-label {
+  flex: 1;
+}
+
+.menu-icon {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+@keyframes nudge {
+  50% { transform: translateX(3px); }
+}
+
+@media (min-width: 480px) {
+  .menu-item { font-size: 14px; }
+  .dialog-text { font-size: 14px; }
+}
+
+/* ---------- Motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .start,
+  .menu-item:hover .menu-cursor,
+  .menu-item:focus-visible .menu-cursor {
+    animation: none;
+  }
+
+  .title,
+  .start,
+  .credit,
+  .hud,
+  .dialog-wrap {
+    transition: none !important;
+  }
 }

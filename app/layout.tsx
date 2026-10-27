@@ -6,20 +6,24 @@ const assetPrefix = process.env.NEXT_PUBLIC_BASE_PATH || ""
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
 const dogica = localFont({
-  src: '../public/fonts/dogica/dogicapixel.otf',
+  src: [
+    { path: '../public/fonts/dogica/dogicapixel.otf', weight: '400', style: 'normal' },
+    { path: '../public/fonts/dogica/dogicapixelbold.otf', weight: '700', style: 'normal' },
+  ],
   display: 'swap',
+  variable: '--font-pixel',
 })
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
+  themeColor: '#f17b2a',
 }
 
 export const metadata: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   title: 'Posky Cloud',
-  description: 'A Posky Cloud space over the web',
+  description: 'Navighiamo — un tramonto a 8 bit da ascoltare',
   keywords: ['Next.js', 'React', 'JavaScript'],
   creator: 'Gionata Stante',
   publisher: 'Gionata Stante',
@@ -46,7 +50,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Posky Cloud',
-    description: 'A Posky Cloud space over the web',
+    description: 'Navighiamo — un tramonto a 8 bit da ascoltare',
     siteName: '',
     images: [
       {
@@ -73,10 +77,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={dogica.className}>
+    <html lang="it" className={dogica.variable}>
+      <body>
         {children}
-        <div id='react-modal'></div>
       </body>
     </html>
   )
