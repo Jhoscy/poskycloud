@@ -2,6 +2,9 @@ import './globals.css'
 import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 
+const assetPrefix = process.env.NEXT_PUBLIC_BASE_PATH || ""
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+
 const dogica = localFont({
   src: '../public/fonts/dogica/dogicapixel.otf',
   display: 'swap',
@@ -14,29 +17,30 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   title: 'Posky Cloud',
   description: 'A Posky Cloud space over the web',
   keywords: ['Next.js', 'React', 'JavaScript'],
   creator: 'Gionata Stante',
   publisher: 'Gionata Stante',
-  manifest: "/favicon/site.webmanifest",
+  manifest: `${assetPrefix}/favicon/site.webmanifest`,
   icons: {
     icon: [{
       rel: 'icon',
       type: 'image/png',
       sizes: '32x32',
-      url: "/favicon/favicon-32x32.png",
+      url: `${assetPrefix}/favicon/favicon-32x32.png`,
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '16x16',
-      url: "/favicon/favicon-16x16.png",
+      url: `${assetPrefix}/favicon/favicon-16x16.png`,
     },
     {
       rel: 'apple-touch-icon',
       sizes: '180x180',
-      url: "/favicon/apple-touch-icon.png",
+      url: `${assetPrefix}/favicon/apple-touch-icon.png`,
     },
     ]
   },
