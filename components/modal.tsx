@@ -36,12 +36,13 @@ export default function PoskyModal(props: PoskyModalProps) {
   const { isOpen, children, onModalClose } = props;
 
   const windowSize = useWindowSize();
-
-  if (windowSize.width > 1024 ) {
-    modalStyle.content.width = '500px';
-  } else {
-    modalStyle.content.width = '90%';
-  }
+  const style = {
+    ...modalStyle,
+    content: {
+      ...modalStyle.content,
+      width: windowSize.width > 1024 ? '500px' : '90%',
+    },
+  };
 
   const afterOpenModal = (modal: any) => {};
 
@@ -49,7 +50,7 @@ export default function PoskyModal(props: PoskyModalProps) {
     isOpen={isOpen}
     onAfterOpen={afterOpenModal}
     onRequestClose={onModalClose}
-    style={modalStyle}
+    style={style}
     contentLabel="Navighiamo"
   >
     {children}

@@ -15,7 +15,7 @@ export type ButtonBarProps = {
         src: string;
         alt: string;
     }
-    onButtonClick: () => Function;
+    onButtonClick: () => void;
 }
 
 export default function ButtonBar({ windowSize, style, image, onButtonClick}: ButtonBarProps) {

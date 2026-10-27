@@ -11,19 +11,20 @@ const AudioStatusTimeBar = ({ audioRef }: AudioStatusTimeBarProps) => {
     const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
-        // Listen for time updates when the audio is playing
+        const audio = audioRef.current;
+        if (!audio) return;
+
         const updateTime = () => {
             if (!isDragging) {
-                setCurrentTime(audioRef?.current?.currentTime);
+                setCurrentTime(audio.currentTime);
             }
-            setDuration(audioRef.current?.duration);
+            setDuration(audio.duration);
         };
 
-        audioRef?.current?.addEventListener('timeupdate', updateTime);
+        audio.addEventListener('timeupdate', updateTime);
 
-        // Clean up the event listener when the component is unmounted
         return () => {
-            audioRef?.current?.removeEventListener('timeupdate', updateTime);
+            audio.removeEventListener('timeupdate', updateTime);
         };
     }, [audioRef, isDragging]);
 

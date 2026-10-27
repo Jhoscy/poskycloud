@@ -1,15 +1,12 @@
 'use client'
 /** Core */
 import Image from "next/image"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 /** Utilities */
-import { isProd, prefix, setFixedHeight } from "@/lib/utilities";
+import { prefix, setFixedHeight } from "@/lib/utilities";
 /** Components */
 import LinkTree from "@/components/linktree";
 import PoskyModal from "@/components/modal";
-/** Firebase */
-import { firebase, isSupported } from "@/firebase/config";
-import { getAnalytics } from "firebase/analytics";
 
 export default function Sea() {
     /** Fixed Viewporth height */
@@ -19,20 +16,11 @@ export default function Sea() {
 
     const handleShare = async () => { };
 
-    useEffect(() => {
-        if (typeof window != undefined && isProd) {
-            //() Initialize Firebase
-            isSupported().then(supported => {
-                const analytics = getAnalytics(firebase);
-            }).catch(err => console.log(err))
-        }
-    }, []);
-
-
-    return <div className="w-full h-full overflow-hidden">
+    return <div className="relative h-screen w-full overflow-hidden">
         <Image
             src={`${prefix}/images/full.gif`} alt="sea background"
             fill={true}
+            unoptimized
             style={{
                 objectFit: 'cover',
                 height: '100%',
@@ -43,6 +31,8 @@ export default function Sea() {
             }}
             onClick={() => setModalIsOpen(true)}
         />
-        <PoskyModal isOpen={modalOpen} onModalClose={onModalCloseHandler} children={<LinkTree onWebClick={handleShare} />} />
+        <PoskyModal isOpen={modalOpen} onModalClose={onModalCloseHandler}>
+          <LinkTree onWebClick={handleShare} />
+        </PoskyModal>
     </div>
 }   
